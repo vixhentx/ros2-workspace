@@ -22,15 +22,7 @@ xhost +local:docker
 # 6. 进入新目录并启动容器
 echo "正在启动容器..."
 cd $DIR
-if [ "$(docker ps -a -q -f name=ros2-dev)" ]; then
-    echo "正在停止并删除现有的 'ros2-dev' 容器..."
-    docker stop ros2-dev
-    docker rm ros2-dev
-fi
-docker-compose up -d
+docker-compose up -d --build`
 set -e
 
-echo "   成功! 您的 ROS 2 开发环境已启动并正在运行。"
-echo "   容器名称: ros2-dev"
-echo "   进入容器: docker exec -it ros2-dev bash"
-echo "   停止容器: cd $DIR && docker-compose down"
+echo "   成功! 开发环境已启动"

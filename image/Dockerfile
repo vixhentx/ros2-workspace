@@ -43,7 +43,8 @@ RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/
 EXPOSE 22 
 RUN apt install -y \
     rsync \
-    inotify-tools
+    inotify-tools \
+    tini
 # 安装 Dev Container CLI 工具
 RUN curl -fsSL https://raw.githubusercontent.com/devcontainers/cli/main/install.sh | sh
 
@@ -67,6 +68,3 @@ ENV no_proxy=
 
 USER vscode
 WORKDIR /home/vscode
-
-# # # 默认命令, 保持容器运行, 方便dev-container和ssh连接
-CMD ["sleep", "infinity"]

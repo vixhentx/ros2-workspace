@@ -11,7 +11,8 @@
 ## 使用方法
 编译镜像
 ```bash
-bash build-image.sh
+cd image && bash build.sh
+cd ..
 ```
 安装`rosup`
 ```bash
