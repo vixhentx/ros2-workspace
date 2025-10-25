@@ -1,10 +1,8 @@
  {
   "name": "ROS 2 Humble Dev Container",
-
-  "build": {
-    "dockerfile": "../Dockerfile"
-  },
-
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "ros2-dev",
+  "workspaceFolder": "/home/vscode/ros2_ws",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -23,8 +21,5 @@
     }
   },
 
-  "remoteUser": "vscode",
-
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "workspaceMount": "source=${localWorkspaceFolderBasename},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached"
+  "remoteUser": "vscode"
 }

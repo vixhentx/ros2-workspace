@@ -39,7 +39,6 @@ services:
       
     # 权限
     privileged: true
-    user: "vscode"  # 使用您创建的开发用户
     
     # 保持运行
     stdin_open: true
