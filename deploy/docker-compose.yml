@@ -43,12 +43,15 @@ services:
     stdin_open: true
     tty: true
       
-    # 自定义命令（可选）
+    # 自定义命令
     command: >
       bash -c "
-        service ssh start &&
-        echo 'ROS2 开发环境已启动' &&
-        echo 'SSH: ssh -p 2222 vscode@localhost (密码: 在Dockerfile中设置)' &&
-        echo 'Code Server: http://localhost:8080' &&
+        sudo /usr/sbin/sshd &&
+        echo 'SSH 服务已启动.' &&
+        echo '正在执行工作控件初始化脚本 init script...' &&
+        bash /home/vscode/ros2_ws/init.sh &&
+        echo '---' &&
+        echo 'ROS2-Dev 容器已经启动' &&
+        echo '通过SSH连接: ssh vscode@localhost (password: password)' &&
         tail -f /dev/null
       "

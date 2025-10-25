@@ -1,39 +1,29 @@
 # ROS2 in Docker
-把ros-humble-desktop-full打包成了一个带工作区的Docker镜像
+把ros-humble-desktop-full打包成了一个带工作区的Docker镜像,便于使用Dev Container开发:
+- 启动时自动运行工作区`ros2_ws`的`init.sh`便于初始化
+- 可选安装一个简易的脚本工具`rosup`来快速生成工作区
+- 预装工具: 最新版的rqt,gcc,clang,x11桥接器等等
+- 预装vscode插件: C++, Python, ROS, Clang全家桶
+- 默认启用ssh连接
 
-会把当前目录下的ros2_ws挂载到根目录,并自动执行init.sh
 
-## 编译镜像
-```shell
-bash build.sh
-```
-## 快速部署
-```shell
-bash d.sh
-```
 
 ## 使用方法
-确保已经桥接好了x11
-```shell
-xhost +local:docker
+编译镜像
+```bash
+bash build-image.sh
 ```
-创建工作区
-```shell
-mkdir ros2_ws
-touch ros2_ws/init.sh
-echo sleep infinity >> init.sh
+安装`rosup`
+```bash
+bash install.sh
 ```
-后台运行镜像
-```shell
-docker-compose up -d
+创建工作区(交互式创建)
+```bash
+rosup
 ```
-
-进入容器终端
-```shell
-#查看容器
-docker ps | grep ros2
-#进入容器
-docker exec -it 容器名称 bash
+或者通过参数创建
+```bash
+rosup my_workspace
 ```
 
 ## Credits

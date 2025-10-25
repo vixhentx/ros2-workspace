@@ -1,1 +1,0 @@
-docker build --network host --build-arg HTTP_PROXY="http://localhost:7890" --build-arg HTTPS_PROXY="http://localhost:7890" --build-arg NO_PROXY="localhost,127.0.0.1" -t ros2_workspace .

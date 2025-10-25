@@ -1,0 +1,30 @@
+ {
+  "name": "ROS 2 Humble Dev Container",
+
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vadimcn.vscode-lldb",
+        "ms-vscode.cpptools-extension-pack",
+        "xaver.clang-format",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.vscode-python-envs",
+        "Ranch-Hand-Robotics.rde-ros-2"
+      ]
+    }
+  },
+
+  "remoteUser": "vscode",
+
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=${localWorkspaceFolderBasename},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached"
+}

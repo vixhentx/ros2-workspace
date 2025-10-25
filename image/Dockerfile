@@ -24,39 +24,38 @@ RUN apt-get update && apt-get install -y \
     lsb-release \ 
     wget \ 
     gnupg \
+    git \
     x11-apps libxext-dev libxrender-dev libxtst-dev \
-    vim \
+    neovim \
     htop nvtop \
     clang clangd clang-format \
     openssh-server \
     '~nros-humble-rqt*'
 
 # 更新所有软件包
-RUN apt full-update -y
+RUN apt full-upgrade -y
 
 # 配置SSH
 RUN mkdir /var/run/sshd
 RUN echo 'root:password' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config 
-
-# 同步工具
-RUN apt-get update && apt-get install -y \
+EXPOSE 22 
+RUN apt install -y \
     rsync \
     inotify-tools
-# VS Code Server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-RUN code-server --install-extension vadimcn.vscode-lldb \
-    ms-vscode.cpptools-extension-pack \
-    xaver.clang-format \
-    llvm-vs-code-extensions.vscode-clangd \
-    twxs.cmake \
-    ms-vscode.cmake-tools \
-    ms-python.vscode-pylance \
-    ms-python.python \
-    ms-python.debugpy \
-    ms-python.vscode-python-envs \
-    Ranch-Hand-Robotics.rde-ros-2 
+# 安装 Dev Container CLI 工具
+RUN curl -fsSL https://raw.githubusercontent.com/devcontainers/cli/main/install.sh | sh
+
+#开发用户
+RUN useradd -m -s /bin/bash -G sudo vscode && \
+    echo 'vscode ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    echo 'vscode:password' | chpasswd
+
+# # 设置SSH自启脚本
+# COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+# RUN chmod +x /usr/local/bin/entrypoint.sh
+# ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # 清除apt缓存
 RUN rm -rf /var/lib/apt/lists/*
@@ -65,8 +64,9 @@ ENV http_proxy=
 ENV https_proxy=
 ENV no_proxy=
 
-# 开发用户
-RUN useradd -m -s /bin/bash -G sudo vscode && \
-    echo 'vscode ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER vscode
+WORKDIR /home/vscode
+
+# # # 默认命令, 保持容器运行, 方便dev-container和ssh连接
+CMD ["sleep", "infinity"]
