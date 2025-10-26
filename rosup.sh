@@ -13,7 +13,7 @@ fi
 echo "正在创建工作区"
 mkdir -p $DIR
 # 复制 deploy 文件夹的内容
-cp -r $INSTALL_PATH/deploy/* $DIR
+rsync -av $INSTALL_PATH/deploy/ $DIR
 
 # 5. 允许 X11 连接
 echo "允许本地 X11 连接 (xhost)..."
@@ -22,7 +22,7 @@ xhost +local:docker
 # 6. 进入新目录并启动容器
 echo "正在启动容器..."
 cd $DIR
-docker-compose up -d --build`
+docker-compose up -d --build
 set -e
 
 echo "   成功! 开发环境已启动"

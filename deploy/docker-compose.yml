@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: ros2-dev
-    hostname: ros2-dev
     
     # 网络配置
     network_mode: "host"
