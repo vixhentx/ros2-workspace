@@ -19,10 +19,6 @@ rsync -av $INSTALL_PATH/deploy/ $DIR
 echo "允许本地 X11 连接 (xhost)..."
 xhost +local:docker
 
-# 6. 进入新目录并启动容器
-echo "正在启动容器..."
-cd $DIR
-docker-compose up -d --build
 set -e
 
-echo "   成功! 开发环境已启动"
+echo "   成功! ROS2开发环境已搭建!"
