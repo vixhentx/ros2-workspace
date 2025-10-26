@@ -5,6 +5,11 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      
+    # GPU权限
+    group_add:
+      - ${GID_VIDEO}
+      - ${GID_RENDER}
     
     # 网络配置
     network_mode: "host"
