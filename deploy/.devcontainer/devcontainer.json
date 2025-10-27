@@ -6,7 +6,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "vadimcn.vscode-lldb",
         "ms-vscode.cpptools-extension-pack",
         "xaver.clang-format",
         "llvm-vs-code-extensions.vscode-clangd",
